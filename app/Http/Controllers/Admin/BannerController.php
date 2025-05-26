@@ -26,10 +26,12 @@ class BannerController extends Controller
         $banner->link = $request->link;
         $banner->description = $request->description;
 
+
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/banners'), $fileName);
+            $destinationPath = base_path('../public_html/img/banners');
+            $filePath = $file->move($destinationPath, $fileName);
             $banner->image_url = 'img/banners/' . $fileName;
         }
 
@@ -60,14 +62,18 @@ class BannerController extends Controller
         $banner->description = $request->description;
 
         if ($request->hasFile('cover')) {
+            $oldImagePath = base_path('../public_html/' . $banner->image_url);
 
-            if ($banner->image_url && file_exists(public_path($banner->image_url))) {
-                unlink(public_path($banner->image_url));
+            if ($banner->image_url && file_exists($oldImagePath)) {
+                unlink($oldImagePath);
             }
-            
+
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/banners'), $fileName);
+            $destinationPath = base_path('../public_html/img/banners');
+
+            $file->move($destinationPath, $fileName);
+
             $banner->image_url = 'img/banners/' . $fileName;
         }
 

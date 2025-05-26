@@ -28,9 +28,14 @@ class CompanyController extends Controller
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/companies'), $fileName);
+
+            $destinationPath = base_path('../public_html/img/companies');
+
+            $filePath = $file->move($destinationPath, $fileName);
+
             $company->image_url = 'img/companies/' . $fileName;
         }
+
 
         $company->save();
 
@@ -58,12 +63,18 @@ class CompanyController extends Controller
         $company->type = $request->type;
 
         if ($request->hasFile('cover')) {
-            if ($company->image_url && file_exists(public_path($company->image_url))) {
-                unlink(public_path($company->image_url));
+            $oldImagePath = base_path('../public_html/' . $company->image_url);
+
+            if ($company->image_url && file_exists($oldImagePath)) {
+                unlink($oldImagePath);
             }
+
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/companies'), $fileName);
+            $destinationPath = base_path('../public_html/img/companies');
+
+            $file->move($destinationPath, $fileName);
+
             $company->image_url = 'img/companies/' . $fileName;
         }
 

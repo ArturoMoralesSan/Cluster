@@ -28,8 +28,9 @@ class ServiceController extends Controller
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/services'), $fileName);
-            $service->image_url = 'img/services/' . $fileName;
+            $destinationPath = base_path('../public_html/img/services');
+            $filePath = $file->move($destinationPath, $fileName);
+            $banner->image_url = 'img/services/' . $fileName;
         }
 
         $service->save();
@@ -58,14 +59,18 @@ class ServiceController extends Controller
         $service->description = $request->description;
 
         if ($request->hasFile('cover')) {
+            $oldImagePath = base_path('../public_html/' . $service->image_url);
 
-            if ($service->image_url && file_exists(public_path($service->image_url))) {
-                unlink(public_path($service->image_url));
+            if ($service->image_url && file_exists($oldImagePath)) {
+                unlink($oldImagePath);
             }
-            
+
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/services'), $fileName);
+            $destinationPath = base_path('../public_html/img/services');
+
+            $file->move($destinationPath, $fileName);
+
             $service->image_url = 'img/services/' . $fileName;
         }
 

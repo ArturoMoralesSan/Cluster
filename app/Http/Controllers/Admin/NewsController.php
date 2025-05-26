@@ -31,7 +31,11 @@ class NewsController extends Controller
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/noticias'), $fileName);
+
+            $destinationPath = base_path('../public_html/img/noticias');
+
+            $filePath = $file->move($destinationPath, $fileName);
+
             $news->image_url = 'img/noticias/' . $fileName;
         }
 
@@ -62,16 +66,21 @@ class NewsController extends Controller
         $news->slug = Str::slug($request->title);
 
         if ($request->hasFile('cover')) {
+            $oldImagePath = base_path('../public_html/' . $news->image_url);
 
-            if ($news->image_url && file_exists(public_path($news->image_url))) {
-                unlink(public_path($news->image_url));
+            if ($news->image_url && file_exists($oldImagePath)) {
+                unlink($oldImagePath);
             }
-            
+
             $file = $request->file('cover');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->move(public_path('img/noticias'), $fileName);
+            $destinationPath = base_path('../public_html/img/noticias');
+
+            $file->move($destinationPath, $fileName);
+
             $news->image_url = 'img/noticias/' . $fileName;
         }
+
 
         $news->save();
 
