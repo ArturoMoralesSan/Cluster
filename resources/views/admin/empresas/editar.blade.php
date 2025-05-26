@@ -78,7 +78,7 @@
                             <div class="md:col-2/3">
                                 {{-- Avatar --}}
                                 <div class="form-control">
-                                    <label for="cover" v-text="hasAvatar ? 'Reemplazar imagen' : 'Agregar imagen'"></label>
+                                    <label for="cover" v-text="'Agregar imagen'"></label>
 
                                     <file-field name="cover" v-model="fields.cover"></file-field>
 
