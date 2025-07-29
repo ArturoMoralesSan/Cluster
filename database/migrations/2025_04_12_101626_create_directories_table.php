@@ -18,6 +18,8 @@ class CreateDirectoriesTable extends Migration
             $table->string('name', 255);
             $table->string('position', 255);
             $table->string('email', 255)->nullable();
+            $table->integer('order')->nullable();
+            $table->string('image_url', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -5,9 +5,9 @@
           class="card__directory__header"
         >
         <img
-          v-if="persona.foto"
+          v-if="persona.image_url"
           class="card__directory__avatar"
-          :src="persona.foto"
+          :src="persona.image_url"
           alt="Foto de perfil"
         />
         <img

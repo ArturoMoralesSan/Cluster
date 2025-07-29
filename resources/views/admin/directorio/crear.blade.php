@@ -67,6 +67,31 @@
 
                         </div>
                     </section>
+                    <section class="db-panel mb-16">
+                        <h3 class="db-panel__title">
+                            Imagen
+                        </h3>
+                        <div class="md:row">
+                            <div class="md:col-2/3">
+                                <div class="form-control">
+                                    <label for="cover"> Agregar imagen</label>
+
+                                    <file-field name="cover" v-model="fields.cover"></file-field>
+
+                                    <field-errors name="cover"></field-errors>
+                                    <ul id="cover-specs" class="description color-gray-darken-1">
+                                        <li>
+                                            Tamaño máximo: 1 MB.
+                                        </li>
+                                        <li>
+                                            Sólo archivos con extensión jpeg, gif, png.
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     <div class="text-center">
                         <form-button class="btn--success btn--wide">
                             Crear

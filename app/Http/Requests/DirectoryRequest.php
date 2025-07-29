@@ -19,6 +19,7 @@ class DirectoryRequest extends FormRequest
             'name' => ['required', new NotUppercase, new NotLowercase, 'max:100'],
             'position' => ['required', new NotLowercase, 'max:100'],
             'email' => ['required','email', new NotUppercase, 'max:100'],
+            'cover' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ];
     }
 }

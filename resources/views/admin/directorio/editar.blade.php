@@ -60,7 +60,43 @@
                             </div>
                         </div>
                     </section>
+                    <section class="db-panel mb-16">
+                        <h3 class="db-panel__title">
+                            Portada
+                        </h3>
+                        <div clas="md:row">
+                            @if($directory->image_url)
+                                <div class="preview-aside">
+                                    <figure class="preview-aside__box preview-box">
+                                        
+                                        <img class="preview-box__img" src="{{ url($directory->image_url) }}" alt="" ref="thumb">                                  
+                                        <figcaption class="preview-box__caption">
+                                            Imagen actual
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            @endif
+                            <div class="md:col-2/3">
+                                {{-- Avatar --}}
+                                <div class="form-control">
+                                    <label for="cover">Agregar imagen</label>
 
+                                    <file-field name="cover" v-model="fields.cover"></file-field>
+
+                                    <field-errors name="cover"></field-errors>
+                                    <ul id="cover-specs" class="description color-gray-darken-1">
+                                        <li>
+                                            Tamaño máximo: 1 MB.
+                                        </li>
+                                        <li>
+                                            Sólo archivos con extensión jpeg, gif, png.
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     <div class="text-center">
                         <form-button class="btn--blue--dashboard btn--wide">
                             Actualizar
